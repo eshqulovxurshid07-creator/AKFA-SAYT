@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Galereya — AKFA ROM</title>
+  <meta name="description" content="AKFA ROM bajarilgan loyihalar galereyasi. Kvartira, uy, ofis va do'konlarga o'rnatilgan premium oynali romlar."/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <style>
+    .gal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+    .gal-item{border-radius:var(--r-lg);overflow:hidden;background:var(--bg-card);
+      border:1px solid var(--border);transition:var(--tr);position:relative;cursor:pointer}
+    .gal-item:hover{border-color:var(--border-h);transform:scale(1.02);box-shadow:var(--shadow-h)}
+    .gal-item.wide{grid-column:span 2}
+    .gal-inner{width:100%;aspect-ratio:4/3;display:flex;align-items:center;
+      justify-content:center;position:relative;overflow:hidden;
+      background:linear-gradient(135deg,var(--bg-card),var(--bg-2))}
+    .gal-item.wide .gal-inner{aspect-ratio:16/7}
+    .gal-overlay{position:absolute;inset:0;background:rgba(7,8,15,.75);
+      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;
+      opacity:0;transition:var(--tr)}
+    .gal-item:hover .gal-overlay{opacity:1}
+    .gal-ov-icon{width:48px;height:48px;border-radius:50%;border:2px solid var(--gold);
+      display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:var(--gold)}
+    .gal-ov-txt{font-size:.72rem;font-weight:700;color:var(--white);letter-spacing:.08em}
+    .gal-caption{padding:.875rem 1rem;display:flex;justify-content:space-between;align-items:center}
+    .gal-cap-title{font-size:.82rem;font-weight:700;color:var(--white)}
+    .gal-cap-loc{font-size:.72rem;color:var(--text-m);display:flex;align-items:center;gap:4px}
+    @media(max-width:768px){.gal-grid{grid-template-columns:1fr}
+      .gal-item.wide{grid-column:span 1}}
+
+    /* Lightbox */
+    #lb{position:fixed;inset:0;background:rgba(0,0,0,.96);z-index:9999;display:none;
+      align-items:center;justify-content:center;backdrop-filter:blur(10px)}
+    #lb.open{display:flex}
+    #lb-content{max-width:90vw;max-height:85vh;border-radius:var(--r-lg);overflow:hidden;
+      border:1px solid var(--border-h)}
+    #lb-close{position:absolute;top:1.5rem;right:1.5rem;width:40px;height:40px;
+      border-radius:50%;background:var(--bg-card);border:1px solid var(--border-h);
+      color:var(--gold);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  </style>
+</head>
+<body>
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><div class="nav-logo-mark">A</div><span class="nav-logo-name">AKFA <em>ROM</em></span></a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="nav-link" data-i18n="nav_home"></a></li>
+      <li><a href="products.html" class="nav-link" data-i18n="nav_products"></a></li>
+      <li><a href="gallery.html" class="nav-link active" data-i18n="nav_gallery"></a></li>
+      <li><a href="about.html" class="nav-link" data-i18n="nav_about"></a></li>
+      <li><a href="services.html" class="nav-link" data-i18n="nav_services"></a></li>
+      <li><a href="blog.html" class="nav-link" data-i18n="nav_blog"></a></li>
+      <li><a href="faq.html" class="nav-link" data-i18n="nav_faq"></a></li>
+      <li><a href="contact.html" class="nav-link" data-i18n="nav_contact"></a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="lang-sw"><button class="lang-btn active" data-lang="uz">UZ</button><button class="lang-btn" data-lang="ru">RU</button><button class="lang-btn" data-lang="en">EN</button></div>
+      <a href="contact.html" class="nav-cta" data-i18n="nav_cta"></a>
+    </div>
+    <button class="nav-toggle"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="nav-mobile"><ul class="nav-mobile-links">
+  <li><a href="index.html" class="nav-mobile-link" data-i18n="nav_home"></a></li>
+  <li><a href="products.html" class="nav-mobile-link" data-i18n="nav_products"></a></li>
+  <li><a href="gallery.html" class="nav-mobile-link" data-i18n="nav_gallery"></a></li>
+  <li><a href="about.html" class="nav-mobile-link" data-i18n="nav_about"></a></li>
+  <li><a href="services.html" class="nav-mobile-link" data-i18n="nav_services"></a></li>
+  <li><a href="blog.html" class="nav-mobile-link" data-i18n="nav_blog"></a></li>
+  <li><a href="faq.html" class="nav-mobile-link" data-i18n="nav_faq"></a></li>
+  <li><a href="contact.html" class="nav-mobile-link" data-i18n="nav_contact"></a></li>
+</ul><div class="lang-sw" style="margin-top:1.5rem"><button class="lang-btn active" data-lang="uz">UZ</button><button class="lang-btn" data-lang="ru">RU</button><button class="lang-btn" data-lang="en">EN</button></div></div>
+
+<div class="page-hero bg-grid">
+  <div class="page-hero-bg"></div>
+  <div class="container" style="position:relative;z-index:1">
+    <span class="section-label" data-i18n="nav_gallery"></span>
+    <h1 class="page-hero-title" data-i18n="gal_title"></h1>
+    <p class="page-hero-desc" data-i18n="gal_desc"></p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div class="gal-filters" data-reveal>
+      <button class="fil-btn active" data-cat="all" data-i18n="gal_f_all"></button>
+      <button class="fil-btn" data-cat="apt" data-i18n="gal_f_apt"></button>
+      <button class="fil-btn" data-cat="house" data-i18n="gal_f_house"></button>
+      <button class="fil-btn" data-cat="office" data-i18n="gal_f_office"></button>
+      <button class="fil-btn" data-cat="shop" data-i18n="gal_f_shop"></button>
+    </div>
+
+    <div class="gal-grid" data-reveal-stagger>
+      <!-- Row 1 -->
+      <div class="gal-item wide" data-cat="apt">
+        <div class="gal-inner" style="background:linear-gradient(135deg,#0d1a2e,#0a1525)">
+          <svg viewBox="0 0 500 220" style="width:90%;opacity:.7" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#c9a84c" stop-opacity=".9"/><stop offset="100%" stop-color="#9a7c30" stop-opacity=".6"/></linearGradient></defs>
+            <rect x="20" y="10" width="210" height="200" rx="4" fill="none" stroke="url(#g1)" stroke-width="7"/>
+            <rect x="30" y="20" width="190" height="180" rx="2" fill="rgba(168,216,255,.07)" stroke="url(#g1)" stroke-width="2.5" stroke-opacity=".5"/>
+            <line x1="125" y1="20" x2="125" y2="200" stroke="url(#g1)" stroke-width="5"/>
+            <line x1="30" y1="110" x2="220" y2="110" stroke="url(#g1)" stroke-width="5"/>
+            <rect x="113" y="107" width="24" height="6" rx="3" fill="url(#g1)"/>
+            <rect x="270" y="10" width="210" height="200" rx="4" fill="none" stroke="url(#g1)" stroke-width="7"/>
+            <rect x="280" y="20" width="190" height="180" rx="2" fill="rgba(168,216,255,.07)" stroke="url(#g1)" stroke-width="2.5" stroke-opacity=".5"/>
+            <line x1="375" y1="20" x2="375" y2="200" stroke="url(#g1)" stroke-width="5"/>
+            <line x1="280" y1="110" x2="470" y2="110" stroke="url(#g1)" stroke-width="5"/>
+            <rect x="363" y="107" width="24" height="6" rx="3" fill="url(#g1)"/>
+          </svg>
+          <div class="gal-overlay"><div class="gal-ov-icon">⊕</div><div class="gal-ov-txt">Ko'rish</div></div>
+        </div>
+        <div class="gal-caption">
+          <div class="gal-cap-title">Yunusobod, 18-mavze — Kvartira</div>
+          <div class="gal-cap-loc"><i class="fas fa-location-dot" style="color:var(--gold);font-size:.65rem"></i> Toshkent</div>
+        </div>
+      </div>
+      <div class="gal-item" data-cat="house">
+        <div class="gal-inner" style="background:linear-gradient(135deg,#1a1206,#0d0c06)">
+          <div class="win-svg-prod" data-name="g3" data-color="#c9a84c" style="width:110px"></div>
+          <div class="gal-overlay"><div class="gal-ov-icon">⊕</div><div class="gal-ov-txt">Ko'rish</div></div>
+        </div>
+        <div class="gal-caption">
+          <div class="gal-cap-title">Cottage — Mirzo Ulug'bek</div>
+          <div class="gal-cap-loc"><i class="fas fa-location-dot" style="color:var(--gold);font-size:.65rem"></i> Toshkent</div>
+        </div>
+      </div>
+
+      <!-- Row 2 -->
+      <div class="gal-item" data-cat="office">
+        <div class="gal-inner" style="background:linear-gradient(135deg,#0a1020,#060810)">
+          <div class="win-svg-prod" data-name="g4" data-color="#60a5fa" style="width:110px"></div>
+          <div class="gal-overlay"><div class="gal-ov-icon">⊕</div><div class="gal-ov-txt">Ko'rish</div></div>
+        </div>
+        <div class="gal-caption">
+          <div class="gal-cap-title">Ofis binosi — Chilonzor</div>
+          <div class="gal-cap-loc"><i class="fas fa-location-dot" style="color:var(--gold);font-size:.65rem"></i> Toshkent</div>
+        </div>
+      </div>
+      <div class="gal-item" data-cat="apt">
+        <div class="gal-inner" style="background:linear-gradient(135deg,#0d1a15,#060d0a)">
+          <div class="win-svg-prod" data-name="g5" data-color="#34d399" style="width:110px"></div>
+          <div class="gal-overlay"><div class="gal-ov-icon">⊕</div><div class="gal-ov-txt">Ko'rish</div></div>
+        </div>
+        <div class="gal-caption">
+          <div class="gal-cap-title">Premium Sliding — Sergeli</div>
+          <div class="gal-cap-loc"><i class="fas fa-location-dot" style="color:var(--gold);font-size:.65rem"></i> Toshkent</div>
+        </div>
+      </div>
+      <div class="gal-item" data-cat="shop">
+        <div class="gal-inner" style="background:linear-gradient(135deg,#1a100a,#0d0806)">
+          <div class="win-svg-prod" data-name="g6" data-color="#fb923c" style="width:110px"></div>
+          <div class="gal-overlay"><div class="gal-ov-icon">⊕</div><div class="gal-ov-txt">Ko'rish</div></div>
+        </div>
+        <div class="gal-caption">
+          <div class="gal-cap-title">Savdo markazi — Shayxontohur</div>
+          <div class="gal-cap-loc"><i class="fas fa-location-dot" style="color:var(--gold);font-size:.65rem"></i> Toshkent</div>
+        </div>
+      </div>
+
+      <!-- Row 3 -->
+      <div class="gal-item" data-cat="house">
+        <div class="gal-inner" style="background:linear-gradient(135deg,#150d1a,#0a0610)">
+          <div class="win-svg-prod" data-name="g7" data-color="#a78bfa" style="width:110px"></div>
+          <div class="gal-overlay"><div class="gal-ov-icon">⊕</div><div class="gal-ov-txt">Ko'rish</div></div>
+        </div>
+        <div class="gal-caption">
+          <div class="gal-cap-title">Elite — Uchtepa</div>
+          <div class="gal-cap-loc"><i class="fas fa-location-dot" style="color:var(--gold);font-size:.65rem"></i> Toshkent</div>
+        </div>
+      </div>
+      <div class="gal-item wide" data-cat="office">
+        <div class="gal-inner" style="background:linear-gradient(135deg,#0a1020,#060810);aspect-ratio:16/7">
+          <svg viewBox="0 0 500 160" style="width:85%;opacity:.6" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="g8" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#60a5fa" stop-opacity=".9"/><stop offset="100%" stop-color="#3b82f6" stop-opacity=".5"/></linearGradient></defs>
+            <rect x="10" y="10" width="90" height="140" rx="3" fill="none" stroke="url(#g8)" stroke-width="5"/>
+            <line x1="55" y1="10" x2="55" y2="150" stroke="url(#g8)" stroke-width="3.5"/>
+            <line x1="10" y1="80" x2="100" y2="80" stroke="url(#g8)" stroke-width="3.5"/>
+            <rect x="120" y="10" width="90" height="140" rx="3" fill="none" stroke="url(#g8)" stroke-width="5"/>
+            <line x1="165" y1="10" x2="165" y2="150" stroke="url(#g8)" stroke-width="3.5"/>
+            <line x1="120" y1="80" x2="210" y2="80" stroke="url(#g8)" stroke-width="3.5"/>
+            <rect x="230" y="10" width="90" height="140" rx="3" fill="none" stroke="url(#g8)" stroke-width="5"/>
+            <line x1="275" y1="10" x2="275" y2="150" stroke="url(#g8)" stroke-width="3.5"/>
+            <line x1="230" y1="80" x2="320" y2="80" stroke="url(#g8)" stroke-width="3.5"/>
+            <rect x="340" y="10" width="90" height="140" rx="3" fill="none" stroke="url(#g8)" stroke-width="5"/>
+            <line x1="385" y1="10" x2="385" y2="150" stroke="url(#g8)" stroke-width="3.5"/>
+            <line x1="340" y1="80" x2="430" y2="80" stroke="url(#g8)" stroke-width="3.5"/>
+          </svg>
+          <div class="gal-overlay"><div class="gal-ov-icon">⊕</div><div class="gal-ov-txt">Ko'rish</div></div>
+        </div>
+        <div class="gal-caption">
+          <div class="gal-cap-title">Biznes markaz — Alyuminiy Fasad</div>
+          <div class="gal-cap-loc"><i class="fas fa-location-dot" style="color:var(--gold);font-size:.65rem"></i> Toshkent, Yashnobod</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats row -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;margin-top:4rem" data-reveal>
+      <div style="text-align:center;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.75rem">
+        <div style="font-family:var(--ff-display);font-size:2.5rem;color:var(--gold)" data-count="1250">0</div>
+        <div style="font-size:.75rem;color:var(--text-m);margin-top:.25rem">Bajarilgan loyiha</div>
+      </div>
+      <div style="text-align:center;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.75rem">
+        <div style="font-family:var(--ff-display);font-size:2.5rem;color:var(--gold)" data-count="15">0</div>
+        <div style="font-size:.75rem;color:var(--text-m);margin-top:.25rem">Tuman va shaharlar</div>
+      </div>
+      <div style="text-align:center;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.75rem">
+        <div style="font-family:var(--ff-display);font-size:2.5rem;color:var(--gold)">5.0★</div>
+        <div style="font-size:.75rem;color:var(--text-m);margin-top:.25rem">O'rtacha baho</div>
+      </div>
+      <div style="text-align:center;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.75rem">
+        <div style="font-family:var(--ff-display);font-size:2.5rem;color:var(--gold)" data-count="98">0</div>
+        <div style="font-size:.75rem;color:var(--text-m);margin-top:.25rem">% mijoz mamnunligi</div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-block" style="margin-top:4rem" data-reveal>
+      <h2 style="margin-bottom:1rem">Sizning loyihangizni ham qo'shamizmi?</h2>
+      <p style="color:var(--text-m);margin-bottom:2rem;max-width:440px;margin-left:auto;margin-right:auto">Bepul konsultatsiya va narx hisoblash uchun hozir bog'laning.</p>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+        <a href="contact.html" class="btn btn-primary"><i class="fas fa-phone"></i> Bog'lanish</a>
+        <a href="https://wa.me/998993323173" target="_blank" class="btn btn-secondary"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div id="lb"><div id="lb-content"></div><button id="lb-close">✕</button></div>
+
+<footer class="footer"><div class="container">
+  <div class="footer-grid">
+    <div><a href="index.html" class="nav-logo" style="display:inline-flex"><div class="nav-logo-mark">A</div><span class="nav-logo-name">AKFA <em>ROM</em></span></a><p class="footer-brand-desc" data-i18n="ft_desc"></p><div class="footer-social"><a href="https://t.me/Xurshidbek0211" target="_blank" class="footer-soc"><i class="fab fa-telegram"></i></a><a href="https://wa.me/998993323173" target="_blank" class="footer-soc"><i class="fab fa-whatsapp"></i></a><a href="mailto:eshqulovxurshid07@gmail.com" class="footer-soc"><i class="fas fa-envelope"></i></a></div></div>
+    <div class="footer-col"><h5 data-i18n="ft_pages"></h5><div class="footer-links"><a href="index.html" class="footer-link" data-i18n="nav_home"></a><a href="products.html" class="footer-link" data-i18n="nav_products"></a><a href="gallery.html" class="footer-link" data-i18n="nav_gallery"></a><a href="about.html" class="footer-link" data-i18n="nav_about"></a></div></div>
+    <div class="footer-col"><h5 data-i18n="ft_support"></h5><div class="footer-links"><a href="services.html" class="footer-link" data-i18n="nav_services"></a><a href="faq.html" class="footer-link" data-i18n="nav_faq"></a><a href="contact.html" class="footer-link" data-i18n="nav_contact"></a></div></div>
+    <div class="footer-col"><h5 data-i18n="ft_contact"></h5><div class="footer-links"><a href="tel:+998993323173" class="footer-link"><i class="fas fa-phone" style="color:var(--gold);margin-right:6px;font-size:.7rem"></i>+998 99 332 31 73</a><span class="footer-link"><i class="fas fa-location-dot" style="color:var(--gold);margin-right:6px;font-size:.7rem"></i>Toshkent, Sergeli</span></div></div>
+  </div>
+  <div class="footer-bottom"><p>© 2024 AKFA ROM. <span data-i18n="ft_rights"></span></p></div>
+</div></footer>
+
+<div class="floats">
+  <a href="https://wa.me/998993323173" target="_blank" class="float-btn float-wa"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+  <a href="https://t.me/Xurshidbek0211" target="_blank" class="float-btn float-tg"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></a>
+</div>
+<button class="scroll-top" id="scrollTop">↑</button>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/main.js"></script>
+<script>
+// Lightbox for gallery
+document.querySelectorAll('.gal-item').forEach(item=>{
+  item.addEventListener('click',()=>{
+    const content = item.querySelector('.gal-inner').cloneNode(true);
+    content.style.cssText='width:80vw;max-width:900px;border-radius:12px;overflow:hidden;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center';
+    document.getElementById('lb-content').innerHTML='';
+    document.getElementById('lb-content').appendChild(content);
+    document.getElementById('lb').classList.add('open');
+  });
+});
+document.getElementById('lb').addEventListener('click',e=>{if(e.target===e.currentTarget)e.currentTarget.classList.remove('open');});
+document.getElementById('lb-close').addEventListener('click',()=>document.getElementById('lb').classList.remove('open'));
+</script>
+</body>
+</html>
